@@ -1,0 +1,8 @@
+set_property PACKAGE_PIN W5 [get_ports clk]
+set_property PACKAGE_PIN V17 [get_ports rst]
+set_property PACKAGE_PIN J1 [get_ports SCL]
+set_property PACKAGE_PIN L2 [get_ports SDA]
+set_property IOSTANDARD LVCMOS33 [get_ports clk]
+set_property IOSTANDARD LVCMOS33 [get_ports rst]
+set_property IOSTANDARD LVCMOS33 [get_ports SCL]
+set_property IOSTANDARD LVCMOS33 [get_ports SDA]
