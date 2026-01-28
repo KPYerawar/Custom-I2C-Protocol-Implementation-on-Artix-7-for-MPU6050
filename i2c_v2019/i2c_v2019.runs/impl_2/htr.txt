@@ -6,4 +6,4 @@
 # Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 #
 
-vivado -log I2C.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source I2C.tcl
+vivado -log I2C.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source I2C.tcl -notrace

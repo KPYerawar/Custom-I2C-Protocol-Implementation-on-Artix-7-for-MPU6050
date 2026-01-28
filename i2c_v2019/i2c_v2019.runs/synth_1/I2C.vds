@@ -1,13 +1,14 @@
-
-*** Running vivado
-    with args -log I2C.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source I2C.tcl
-
-
-****** Vivado v2019.1 (64-bit)
-  **** SW Build 2552052 on Fri May 24 14:47:09 MDT 2019
-  **** IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
-    ** Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
-
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:47:09 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Wed Jan 28 13:56:42 2026
+# Process ID: 5336
+# Current directory: /home/krushna_dev/all_verilog_codes/vivado/I2C interface/i2c_v2019/i2c_v2019.runs/synth_1
+# Command line: vivado -log I2C.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source I2C.tcl
+# Log file: /home/krushna_dev/all_verilog_codes/vivado/I2C interface/i2c_v2019/i2c_v2019.runs/synth_1/I2C.vds
+# Journal file: /home/krushna_dev/all_verilog_codes/vivado/I2C interface/i2c_v2019/i2c_v2019.runs/synth_1/vivado.jou
+#-----------------------------------------------------------
 source I2C.tcl -notrace
 Command: synth_design -top I2C -part xc7a35tcpg236-1
 Starting synth_design
