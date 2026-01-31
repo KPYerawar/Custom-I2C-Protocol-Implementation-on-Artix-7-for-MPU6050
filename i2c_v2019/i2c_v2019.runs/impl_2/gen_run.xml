@@ -1,55 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="impl_2" LaunchPart="xc7a35tcpg236-1" LaunchTime="1769588799">
-  <File Type="ROUTE-PWR-SUM" Name="I2C_power_summary_routed.pb"/>
-  <File Type="ROUTE-METHODOLOGY-DRC" Name="I2C_methodology_drc_routed.rpt"/>
-  <File Type="ROUTE-DRC-RPX" Name="I2C_drc_routed.rpx"/>
-  <File Type="ROUTE-BLACKBOX-DCP" Name="I2C_routed_bb.dcp"/>
-  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="I2C_methodology_drc_routed.pb"/>
-  <File Type="ROUTE-DCP" Name="I2C_routed.dcp"/>
-  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="I2C_methodology_drc_routed.rpx"/>
-  <File Type="ROUTE-ERROR-DCP" Name="I2C_routed_error.dcp"/>
-  <File Type="ROUTE-PWR" Name="I2C_power_routed.rpt"/>
-  <File Type="PHYSOPT-DCP" Name="I2C_physopt.dcp"/>
-  <File Type="ROUTE-DRC-PB" Name="I2C_drc_routed.pb"/>
   <File Type="POSTPLACE-PWROPT-DCP" Name="I2C_postplace_pwropt.dcp"/>
-  <File Type="ROUTE-DRC" Name="I2C_drc_routed.rpt"/>
-  <File Type="OPT-DRC" Name="I2C_drc_opted.rpt"/>
-  <File Type="OPT-DCP" Name="I2C_opt.dcp"/>
+  <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
+  <File Type="RDI-RDI" Name="I2C.vdi"/>
+  <File Type="BITSTR-LTX" Name="I2C.ltx"/>
+  <File Type="BITSTR-SYSDEF" Name="I2C.sysdef"/>
   <File Type="PLACE-PRE-SIMILARITY" Name="I2C_incremental_reuse_pre_placed.rpt"/>
-  <File Type="PLACE-CTRL" Name="I2C_control_sets_placed.rpt"/>
   <File Type="PA-TCL" Name="I2C.tcl"/>
-  <File Type="ROUTE-BUS-SKEW-PB" Name="I2C_bus_skew_routed.pb"/>
-  <File Type="REPORTS-TCL" Name="I2C_reports.tcl"/>
-  <File Type="ROUTE-BUS-SKEW-RPX" Name="I2C_bus_skew_routed.rpx"/>
-  <File Type="OPT-HWDEF" Name="I2C.hwdef"/>
-  <File Type="PLACE-UTIL-PB" Name="I2C_utilization_placed.pb"/>
-  <File Type="BG-BIT" Name="I2C.bit"/>
-  <File Type="ROUTE-STATUS-PB" Name="I2C_route_status.pb"/>
-  <File Type="BG-BIN" Name="I2C.bin"/>
-  <File Type="ROUTE-TIMINGSUMMARY" Name="I2C_timing_summary_routed.rpt"/>
   <File Type="BITSTR-MSK" Name="I2C.msk"/>
   <File Type="ROUTE-TIMING-PB" Name="I2C_timing_summary_routed.pb"/>
-  <File Type="BITSTR-RBT" Name="I2C.rbt"/>
-  <File Type="ROUTE-TIMING-RPX" Name="I2C_timing_summary_routed.rpx"/>
-  <File Type="BITSTR-NKY" Name="I2C.nky"/>
-  <File Type="BITSTR-BMM" Name="I2C_bd.bmm"/>
-  <File Type="ROUTE-CLK" Name="I2C_clock_utilization_routed.rpt"/>
-  <File Type="BG-DRC" Name="I2C.drc"/>
-  <File Type="BITSTR-MMI" Name="I2C.mmi"/>
-  <File Type="ROUTE-BUS-SKEW" Name="I2C_bus_skew_routed.rpt"/>
-  <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
+  <File Type="ROUTE-BLACKBOX-DCP" Name="I2C_routed_bb.dcp"/>
   <File Type="BG-BGN" Name="I2C.bgn"/>
-  <File Type="BITSTR-SYSDEF" Name="I2C.sysdef"/>
-  <File Type="PLACE-UTIL" Name="I2C_utilization_placed.rpt"/>
-  <File Type="BITSTR-LTX" Name="I2C.ltx"/>
-  <File Type="RDI-RDI" Name="I2C.vdi"/>
-  <File Type="PLACE-IO" Name="I2C_io_placed.rpt"/>
-  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="I2C_postroute_physopt_bb.dcp"/>
-  <File Type="POSTROUTE-PHYSOPT-DCP" Name="I2C_postroute_physopt.dcp"/>
-  <File Type="ROUTE-STATUS" Name="I2C_route_status.rpt"/>
-  <File Type="ROUTE-PWR-RPX" Name="I2C_power_routed.rpx"/>
+  <File Type="BITSTR-RBT" Name="I2C.rbt"/>
+  <File Type="REPORTS-TCL" Name="I2C_reports.tcl"/>
+  <File Type="BITSTR-BMM" Name="I2C_bd.bmm"/>
+  <File Type="OPT-HWDEF" Name="I2C.hwdef"/>
+  <File Type="BITSTR-MMI" Name="I2C.mmi"/>
+  <File Type="BITSTR-NKY" Name="I2C.nky"/>
+  <File Type="BG-BIN" Name="I2C.bin"/>
   <File Type="PLACE-DCP" Name="I2C_placed.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="I2C_postroute_physopt_bb.dcp"/>
   <File Type="PWROPT-DCP" Name="I2C_pwropt.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-DCP" Name="I2C_postroute_physopt.dcp"/>
+  <File Type="OPT-DCP" Name="I2C_opt.dcp"/>
+  <File Type="ROUTE-ERROR-DCP" Name="I2C_routed_error.dcp"/>
+  <File Type="BG-DRC" Name="I2C.drc"/>
+  <File Type="BG-BIT" Name="I2C.bit"/>
+  <File Type="ROUTE-DCP" Name="I2C_routed.dcp"/>
+  <File Type="PHYSOPT-DCP" Name="I2C_physopt.dcp"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/new/I2C.v">

@@ -1,0 +1,10 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../i2c_v2019.srcs/sources_1/new/i2c_master1.v" \
+"../../../../i2c_v2019.srcs/sim_1/new/master1_sim.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

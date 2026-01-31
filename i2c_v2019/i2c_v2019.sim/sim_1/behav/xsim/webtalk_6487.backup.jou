@@ -1,0 +1,13 @@
+#-----------------------------------------------------------
+# Webtalk v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:47:09 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Sat Jan 31 16:48:16 2026
+# Process ID: 6487
+# Current directory: /home/krushna_dev/all_verilog_codes/vivado/I2C interface/i2c_v2019/i2c_v2019.sim/sim_1/behav/xsim
+# Command line: wbtcv -mode batch -source /home/krushna_dev/all_verilog_codes/vivado/I2C interface/i2c_v2019/i2c_v2019.sim/sim_1/behav/xsim/xsim.dir/tb_i2c_behav/webtalk/xsim_webtalk.tcl -notrace
+# Log file: /home/krushna_dev/all_verilog_codes/vivado/I2C interface/i2c_v2019/i2c_v2019.sim/sim_1/behav/xsim/webtalk.log
+# Journal file: /home/krushna_dev/all_verilog_codes/vivado/I2C interface/i2c_v2019/i2c_v2019.sim/sim_1/behav/xsim/webtalk.jou
+#-----------------------------------------------------------
+source /home/krushna_dev/all_verilog_codes/vivado/I2C -notrace
+source interface/i2c_v2019/i2c_v2019.sim/sim_1/behav/xsim/xsim.dir/tb_i2c_behav/webtalk/xsim_webtalk.tcl -notrace

@@ -13,146 +13,89 @@
 // 
 // Dependencies: 
 // 
-// Revision:
+// Rsevision:
 // Revision 0.01 - File Created
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-
-module i2c_master1 (
-    input  wire clk,        // 100 MHz
-    input  wire rst,
-    inout  wire SDA,
-    output reg  SCL
+module i2c_master1(
+input clk ,// 100MHz
+input rst,
+inout SDA ,
+output reg SCL 
 );
 
-    // -------------------------
-    // Clock divider for I2C
-    // -------------------------
-    reg [8:0] clk_cnt;
-    reg i2c_clk;
+reg FSM_CLK ;///fsm clk which will  work ok 100khz
+reg [8:0] counter = 0 ;//this will count till 499 and return to 0 to from a 50%duty cycle for fsm_clk 
+reg SDA_EN;
+reg MPU_ADDR = 'h68;//mpu address 
+reg [3:0] bitcnt = 7 ;
+reg kick_start = 0 ;
+/////////////////////////////////////////////////////////////////
+reg [3:0] state = 0 ;
+////////////////////////////////////////////////////////
+localparam IDLE =  1 ;
+localparam START = 2;
+localparam SEND_ADDR_MPU = 3;
+//////////////////////////////////////////////////////////////////////////////////////////
+/*  CLOCK FOR FSM IN I2C */
+///////////////////////////////////////////////////////////////////////////////////////
+always @(posedge clk or posedge rst) begin 
+if ( rst ) begin 
+FSM_CLK <= 0 ;
+counter <= 0 ;
+end
+else begin 
+          if ( counter == 499) begin 
+            counter <= 9'b0 ;
+            FSM_CLK <= ~ FSM_CLK;//toggle at 50 % duty cycle
+            end 
+           else counter <= counter + 1 ;
+           
+      end 
+ end 
 
-    always @(posedge clk or posedge rst) begin
-        if (rst) begin
-            clk_cnt <= 0;
-            i2c_clk <= 0;
-        end else if (clk_cnt == 499) begin
-            clk_cnt <= 0;
-            i2c_clk <= ~i2c_clk;   // ~100 kHz
-        end else
-            clk_cnt <= clk_cnt + 1;
-    end
+///////////////////////////////////////////////////////////////////////////////
+/*ACTUAL FSM */
+/////////////////////////////////////////////////////////////////////////////
 
-    // -------------------------
-    // I2C signals
-    // -------------------------
-    reg SDA_drv;   // 0 = drive low, 1 = release
-    assign SDA = (SDA_drv == 1'b0) ? 1'b0 : 1'bz;
+always @(posedge FSM_CLK or posedge rst) begin 
+if (rst ) begin 
+state <= IDLE ; end 
 
-    // -------------------------
-    // FSM
-    // -------------------------
-    reg [3:0] state;
-    reg [2:0] bitcnt;
+else begin 
+               case(state) 
+               IDLE: begin 
+                  SCL <=  1 ;
+                  SDA_EN <= 1 ;
+                  state <= START;                  
+                  end
+            
+                START: begin
+                
+                if ( kick_start == 1 )begin 
+                SCL<= 0;
+                SDA_EN <= 1;
+                state <= SEND_ADDR_MPU ;
+                kick_start<= 0 ; end 
+                else begin 
+                       SDA_EN <= 0 ;
+                       SCL <= 1 ;
+                       state <= START;
+                       kick_start<= 1 ;
+                       end 
+                    
+                end 
+                SEND_ADDR_MPU: begin 
+                SCL<= 1 ;
+                end 
+                       
+                  
+                  
+                    
+endcase 
+end 
 
-    localparam IDLE          = 0,
-               START         = 1,
-               ADDR_LOW      = 2,
-               ADDR_HIGH     = 3,
-               ADDR_ACK      = 4,
-               REG_LOW       = 5,
-               REG_HIGH      = 6,
-               REG_ACK       = 7,
-               STOP          = 8;
-
-    // -------------------------
-    // Data
-    // -------------------------
-    reg [7:0] slave_addr = 8'b11010000; // 0x68 + Write
-    reg [7:0] reg_addr   = 8'b01000001; // example register
-
-    // -------------------------
-    // FSM logic
-    // -------------------------
-    always @(posedge i2c_clk or posedge rst) begin
-        if (rst) begin
-            state   <= IDLE;
-            SCL     <= 1'b1;
-            SDA_drv <= 1'b1;
-            bitcnt  <= 3'd7;
-        end else begin
-            case (state)
-
-            IDLE: begin
-                SCL     <= 1'b1;
-                SDA_drv <= 1'b1;
-                bitcnt  <= 3'd7;
-                state   <= START;
-            end
-
-            START: begin
-                SCL     <= 1'b1;
-                SDA_drv <= 1'b0;   // SDA goes low while SCL high
-                state   <= ADDR_LOW;
-            end
-
-            // -------- Send Slave Address --------
-            ADDR_LOW: begin
-                SCL     <= 1'b0;
-                SDA_drv <= slave_addr[bitcnt];
-                state   <= ADDR_HIGH;
-            end
-
-            ADDR_HIGH: begin
-                SCL <= 1'b1;
-                if (bitcnt == 0) begin
-                    SDA_drv <= 1'b1;  // release for ACK
-                    state   <= ADDR_ACK;
-                end else begin
-                    bitcnt <= bitcnt - 1;
-                    state  <= ADDR_LOW;
-                end
-            end
-
-            ADDR_ACK: begin
-                SCL <= 1'b0;
-                bitcnt <= 3'd7;
-                state <= REG_LOW;
-            end
-
-            // -------- Send Register Address --------
-            REG_LOW: begin
-                SCL     <= 1'b0;
-                SDA_drv <= reg_addr[bitcnt];
-                state   <= REG_HIGH;
-            end
-
-            REG_HIGH: begin
-                SCL <= 1'b1;
-                if (bitcnt == 0) begin
-                    SDA_drv <= 1'b1;
-                    state   <= REG_ACK;
-                end else begin
-                    bitcnt <= bitcnt - 1;
-                    state  <= REG_LOW;
-                end
-            end
-
-            REG_ACK: begin
-                SCL <= 1'b0;
-                state <= STOP;
-            end
-
-            STOP: begin
-                SCL     <= 1'b1;
-                SDA_drv <= 1'b1;   // SDA goes high while SCL high
-                state   <= IDLE;
-            end
-
-            default: state <= IDLE;
-            endcase
-        end
-    end
-
+end
+assign SDA = SDA_EN;
 endmodule
-

@@ -1,0 +1,15 @@
+#-----------------------------------------------------------
+# Webtalk v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:47:09 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Sat Jan 31 16:50:39 2026
+# Process ID: 7026
+# Current directory: /home/krushna_dev/all_verilog_codes/vivado/I2C interface/i2c_v2019/i2c_v2019.sim/sim_1/behav/xsim
+# Command line: wbtcv -mode batch -source /home/krushna_dev/all_verilog_codes/vivado/I2C interface/i2c_v2019/i2c_v2019.sim/sim_1/behav/xsim/xsim.dir/master1_sim_behav/webtalk/xsim_webtalk.tcl -notrace
+# Log file: /home/krushna_dev/all_verilog_codes/vivado/I2C interface/i2c_v2019/i2c_v2019.sim/sim_1/behav/xsim/webtalk.log
+# Journal file: /home/krushna_dev/all_verilog_codes/vivado/I2C interface/i2c_v2019/i2c_v2019.sim/sim_1/behav/xsim/webtalk.jou
+#-----------------------------------------------------------
+source /home/krushna_dev/all_verilog_codes/vivado/I2C -notrace
+source interface/i2c_v2019/i2c_v2019.sim/sim_1/behav/xsim/xsim.dir/master1_sim_behav/webtalk/xsim_webtalk.tcl -notrace
+couldn't read file "interface/i2c_v2019/i2c_v2019.sim/sim_1/behav/xsim/xsim.dir/master1_sim_behav/webtalk/xsim_webtalk.tcl": no such file or directory
+INFO: [Common 17-206] Exiting Webtalk at Sat Jan 31 16:50:39 2026...
