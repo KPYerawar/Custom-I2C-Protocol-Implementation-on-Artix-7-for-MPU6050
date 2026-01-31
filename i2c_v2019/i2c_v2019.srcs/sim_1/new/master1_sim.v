@@ -31,6 +31,9 @@ wire SDA;
 
 
 
+
+
+
 i2c_master1 M1(
 .clk(clk),.rst(rst),.SCL(SCL),.SDA(SDA));
 
