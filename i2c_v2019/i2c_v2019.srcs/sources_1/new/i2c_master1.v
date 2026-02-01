@@ -36,7 +36,7 @@ reg kick_start = 0 ;
 reg ACK_REG;
 reg [7:0] rx_data ;
 reg [3:0] read_bitcnt = 7 ;
-
+reg done ;
 /////////////////////////////////////////////////////////////////
 reg [7:0] state = 0 ;
 reg ACK ;
@@ -73,6 +73,7 @@ localparam NACK_CLK_HIGH = 28 ;
 localparam NACK_CLK_LOW = 29 ;
 localparam STOP_1 = 30 ;
 localparam STOP_2 = 31 ;
+localparam START_2 = 32;
 //////////////////////////////////////////////////////////////////////////////////////////
 /*  CLOCK FOR FSM IN I2C */
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -104,25 +105,24 @@ else begin
                IDLE: begin 
                   SCL <=  1 ;
                   SDA_EN <= 1 ;
+                  if (done == 1 )
+                  state <= IDLE ;
+                  else
                   state <= START;                  
                   end
             
-                START: begin
-                
-                if ( kick_start == 1 )begin 
-                SCL<= 0;
-                SDA_EN <= 1;
-                state <= SEND_ADDR_MPU  ;
-                kick_start<= 0 ; end 
-                else begin 
-                       SDA_EN <= 0 ;
-                       SCL <= 1 ;
-                       state <= START;
-                       kick_start<= 1 ;
-                       end 
-                    
-                end 
-                SEND_ADDR_MPU: begin 
+                   START: begin
+        SCL    <= 1;
+        SDA_EN <= 1;       // SDA high
+        state  <= START_2;
+    end
+    
+    START_2: begin
+        SCL    <= 1;
+        SDA_EN <= 0;       // SDA low while SCL high = START
+        state  <= SEND_ADDR_MPU;
+    end
+                    SEND_ADDR_MPU: begin 
                 SCL <= 0 ;
                 SDA_EN <= MPU_ADDR[bitcnt];                 
                 state <= CLK_HIGH; 
@@ -135,8 +135,9 @@ else begin
                  
                  CLK_LOW: begin 
                  SCL<= 0 ;
-                 if ( bitcnt == 0 )
-                 state <= SEND_WRITE_BIT ;
+                 if ( bitcnt == 0 )begin 
+                 bitcnt<= 6;
+                 state <= SEND_WRITE_BIT ;end
                     else begin 
                  bitcnt <= bitcnt -1 ;
                  state <= SEND_ADDR_MPU;end
@@ -197,6 +198,7 @@ else begin
                   REG_CLK_LOW : begin 
                    SCL <= 0 ;
                    if ( tempbitcnt == 0)begin 
+                   tempbitcnt<= 6 ;
                    state <= SEND_READ_BIT;
                    end 
                    else begin 
@@ -249,6 +251,8 @@ else begin
                   
                   START_RECEIVE_DATA : begin 
                   SCL <= 0 ;
+                  SDA_EN <= 0; // release SDA
+
                   state <= READ_CLK_HIGH;                  
                   end 
                   
@@ -260,8 +264,9 @@ else begin
                   
                   READ_CLK_LOW: begin 
                   SCL<= 0 ;
-                  if (read_bitcnt == 0 )
-                  state <= SEND_NACK; 
+                  if (read_bitcnt == 0 )begin 
+                  read_bitcnt <= 7;
+                  state <= SEND_NACK; end
                   else begin
                   read_bitcnt <= read_bitcnt -1 ;
                   state <= START_RECEIVE_DATA;end end 
@@ -284,12 +289,15 @@ NACK_CLK_LOW : begin
 end
 
         STOP_1 : begin
-    SDA_EN <= 1'b1;     // master drives SDA
+    SDA_EN <= 1'b0;     // master drives SDA
     SCL    <= 1'b1;     // SCL high
     state  <= STOP_2;
 end
 
 STOP_2 : begin
+SDA_EN <= 1;
+SCL<= 1 ;
+done <= 1 ;
     state  <= IDLE;     // bus released
 end
             
@@ -297,5 +305,5 @@ endcase
 end 
 
 end
-assign SDA = (SDA_EN) ? 1'b0 : 1'bz;
+assign SDA = (SDA_EN) ? 1'bz : 1'b0;
 endmodule

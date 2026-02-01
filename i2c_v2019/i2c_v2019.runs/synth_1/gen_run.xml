@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1769588799">
-  <File Type="RDS-DCP" Name="I2C.dcp"/>
   <File Type="PA-TCL" Name="I2C.tcl"/>
+  <File Type="RDS-DCP" Name="I2C.dcp"/>
   <File Type="REPORTS-TCL" Name="I2C_reports.tcl"/>
   <File Type="RDS-RDS" Name="I2C.vds"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
