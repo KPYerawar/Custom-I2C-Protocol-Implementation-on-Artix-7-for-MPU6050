@@ -10,7 +10,7 @@ SDA_PIN = 24
 MPU_ADDR = 0x68  # 7'b1101000
 TEMP_REG = 0x41  # 7'b1000001
 I2C_DELAY = 0.000005  # Approx 100kHz equivalent
-
+#some modifications may made for rwg storage also  
 # --- GPIO SETUP ---
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
